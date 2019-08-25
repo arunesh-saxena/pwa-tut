@@ -1,5 +1,5 @@
-const staticCacheName = 'site-static-v2';
-const dynamicCacheName = 'site-dynamic-v2';
+const staticCacheName = 'site-static-v3';
+const dynamicCacheName = 'site-dynamic-v4';
 const assets = [
   '/',
   '/index.html',
@@ -18,7 +18,7 @@ const assets = [
 const limitCacheSize = (name, size) => {
   caches.open(name).then(cache => {
     cache.keys().then(keys => {
-      if(keys.length > size){
+      if (keys.length > size) {
         cache.delete(keys[0]).then(limitCacheSize(name, size));
       }
     });
@@ -52,7 +52,7 @@ self.addEventListener('activate', evt => {
 
 // fetch events
 self.addEventListener('fetch', evt => {
-  if(evt.request.url.indexOf('firestore.googleapis.com') === -1){
+  if (evt.request.url.indexOf('firestore.googleapis.com') === -1) {
     evt.respondWith(
       caches.match(evt.request).then(cacheRes => {
         return cacheRes || fetch(evt.request).then(fetchRes => {
@@ -64,7 +64,7 @@ self.addEventListener('fetch', evt => {
           })
         });
       }).catch(() => {
-        if(evt.request.url.indexOf('.html') > -1){
+        if (evt.request.url.indexOf('.html') > -1) {
           return caches.match('/pages/fallback.html');
         }
       })
