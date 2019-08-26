@@ -26,3 +26,11 @@ Step to use
 run http server with index.html
 
 
+Copy css, img, js, pages, index.html, manofest.json to public
+
+>firebase deploy 
+
+deploy url
+https://food-pwa-5c3f3.firebaseapp.com/
+
+
